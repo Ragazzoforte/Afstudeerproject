@@ -1,0 +1,119 @@
+!SESSION 2025-04-08 13:04:44.491 -----------------------------------------------
+eclipse.buildId=Version 1.18.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
+Framework arguments:  C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB CDC Example\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB CDC Example\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-04-08 13:05:15.670
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-04-08 13:05:15.672
+!MESSAGE Log4j2 initialized with config file C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-04-08 13:05:18.321
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.resources 4 77 2025-04-08 13:05:18.489
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2025-04-08 13:05:18.489
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2025-04-08 13:05:18.489
+!MESSAGE C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB CDC Example overlaps the location of another project: 'TinyUSB CDC Example'
+
+!ENTRY org.eclipse.core.resources 4 368 2025-04-08 13:05:18.496
+!MESSAGE Resource '/STM32F407_tinyUSB' does not exist.
+!STACK 0
+java.lang.Exception: Resource '/STM32F407_tinyUSB' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:364)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:238)
+	at org.eclipse.core.internal.resources.Project.checkAccessible(Project.java:183)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:244)
+	at org.eclipse.core.internal.resources.Container.members(Container.java:231)
+	at com.st.stm32cube.ide.mcu.converters.AbstractCubeIDEProjectConfigurator.openReadmeFile(AbstractCubeIDEProjectConfigurator.java:1008)
+	at com.st.stm32cube.ide.mcu.ide.ui.project.internal.MCUProjectImporter$3.run(MCUProjectImporter.java:387)
+	at org.eclipse.ui.internal.PendingSyncExec.run(PendingSyncExec.java:68)
+	at org.eclipse.ui.internal.UILockListener.doPendingWork(UILockListener.java:166)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:132)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4099)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3715)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:639)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:546)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:143)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:109)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:439)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:271)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:668)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:605)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1481)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-08 13:08:11.617
+!MESSAGE Indexed 'STM32F407_tinyUSB' (64 sources, 196 headers) in 3.63 sec: 18,466 declarations; 71,037 references; 11 unresolved inclusions; 265 syntax errors; 338 unresolved names (0.38%)
+!SESSION 2025-04-08 13:15:15.235 -----------------------------------------------
+eclipse.buildId=Version 1.18.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-04-08 13:15:25.660
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-04-08 13:15:25.660
+!MESSAGE Log4j2 initialized with config file C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-04-08 13:15:30.964
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2025-04-08 13:15:54.942 -----------------------------------------------
+eclipse.buildId=Version 1.18.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=nl_NL
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-04-08 13:16:05.124
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-04-08 13:16:05.130
+!MESSAGE Log4j2 initialized with config file C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-04-08 13:16:11.047
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.resources 2 2 2025-04-08 13:20:48.754
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2025-04-08 13:20:48.754
+!MESSAGE The project description file (.project) for 'STM32F407_tinyUSB' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-08 13:20:53.694
+!MESSAGE Indexed 'TinyUSB_CDC_Example' (65 sources, 233 headers) in 3.74 sec: 21,194 declarations; 76,463 references; 11 unresolved inclusions; 265 syntax errors; 338 unresolved names (0.34%)
+
+!ENTRY org.eclipse.core.resources 4 77 2025-04-08 13:21:06.654
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2025-04-08 13:21:06.654
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2025-04-08 13:21:06.655
+!MESSAGE C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB_CDC_Example overlaps the location of another project: 'TinyUSB_CDC_Example'
+
+!ENTRY com.st.stm32cube.common.projectcreation 4 0 2025-04-08 13:21:06.655
+!MESSAGE Project is null
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-08 13:21:32.927
+!MESSAGE Indexed 'STM32F407_tinyUSB' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-04-08 13:24:41.507
+!MESSAGE Indexed 'STM32F407_tinyUSB' (65 sources, 233 headers) in 2.38 sec: 21,194 declarations; 76,463 references; 11 unresolved inclusions; 265 syntax errors; 338 unresolved names (0.34%)

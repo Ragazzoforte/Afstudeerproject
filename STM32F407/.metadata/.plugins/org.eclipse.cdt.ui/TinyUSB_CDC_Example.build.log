@@ -1,0 +1,55 @@
+13:21:06 **** Build of configuration Debug for project TinyUSB_CDC_Example ****
+make -j20 all 
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.o"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.o"
+../Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.c:30:10: fatal error: tusb_option.h: No such file or directory
+   30 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+../Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.c:104:10: fatal error: tusb_option.h: No such file or directory
+  104 | #include "tusb_option.h"
+arm-none-eabi-gcc "../Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.d" -MT"Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.o"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+../Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.c:27:10: fatal error: tusb_option.h: No such file or directory
+   27 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/subdir.mk:19: Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/synopsys/dcd_synopsys.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/subdir.mk:19: Middlewares/Third_Party/tinyusb-0.15.0/src/portable/st/stm32_fsdev/dcd_stm32_fsdev.o] Error 1
+../Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.c:27:10: fatal error: tusb_option.h: No such file or directory
+   27 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+../Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.c:27:10: fatal error: tusb_option.h: No such file or directory
+   27 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/host/subdir.mk:22: Middlewares/Third_Party/tinyusb-0.15.0/src/host/hub.o] Error 1
+../Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.c:27:10: fatal error: tusb_option.h: No such file or directory
+   27 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+../Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.c:28:10: fatal error: osal/osal.h: No such file or directory
+   28 | #include "osal/osal.h"
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/host/subdir.mk:22: Middlewares/Third_Party/tinyusb-0.15.0/src/host/usbh.o] Error 1
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/device/subdir.mk:22: Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd.o] Error 1
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/device/subdir.mk:22: Middlewares/Third_Party/tinyusb-0.15.0/src/device/usbd_control.o] Error 1
+../Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.c:28:10: fatal error: tusb_option.h: No such file or directory
+   28 | #include "tusb_option.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/common/subdir.mk:19: Middlewares/Third_Party/tinyusb-0.15.0/src/common/tusb_fifo.o] Error 1
+make: *** [Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/subdir.mk:19: Middlewares/Third_Party/tinyusb-0.15.0/src/class/video/video_device.o] Error 1
+"make -j20 all" terminated with exit code 2. Build might be incomplete.
+
+13:21:07 Build Failed. 17 errors, 0 warnings. (took 980ms)
+

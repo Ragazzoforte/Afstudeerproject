@@ -50,3 +50,38 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# Compiler- en linkeroutput bestanden
+*.o
+*.obj
+*.elf
+*.hex
+*.bin
+*.map
+*.d
+*.dep
+
+# Build directories
+build/
+Debug/
+Release/
+
+# CMake gerelateerde bestanden (indien gebruikt)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# STM32CubeMX configuratiebestand
+*.ioc
+
+# IDE- en editor-specifieke bestanden
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Eventuele tijdelijke bestanden of mappen
+tmp/
+temp/
