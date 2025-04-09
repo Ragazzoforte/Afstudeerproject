@@ -1,0 +1,23 @@
+#ifndef USB_DESCRIPTORS_H_
+#define USB_DESCRIPTORS_H_
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+#include "tusb.h"
+
+// Callback: Geeft de Device Descriptor
+uint8_t const * tud_descriptor_device_cb(void);
+
+// Callback: Geeft de Configuratie Descriptor
+uint8_t const * tud_descriptor_configuration_cb(uint8_t index);
+
+// Callback: Geeft de String Descriptor
+uint16_t const * tud_descriptor_string_cb(uint8_t index, uint16_t langid);
+
+#ifdef __cplusplus
+ }
+#endif
+
+#endif /* USB_DESCRIPTORS_H_ */

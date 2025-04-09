@@ -7,10 +7,14 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB_AUC2.0"/>
+			<item value="C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB_CDC_Example\STM32F407_tinyUSB-main"/>
+			<item value="C:\Users\miche\Documents\Repositories\Afstudeerproject\STM32F407\TinyUSB_CDC_Example"/>
 			<item value="C:\Users\miche\STM32F407_tinyUSB"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
+			<item value="C:\Users\miche\STM32F407_tinyUSB"/>
 		</list>
 		<section name="ExternalProjectImportWizard.dialogBounds">
 			<item key="DIALOG_X_ORIGIN" value="468"/>

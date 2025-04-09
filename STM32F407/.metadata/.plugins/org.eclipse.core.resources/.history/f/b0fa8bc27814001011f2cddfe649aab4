@@ -1,0 +1,68 @@
+#ifndef TUSB_CONFIG_H_
+#define TUSB_CONFIG_H_
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+// --- Board en MCU configuratie ---
+#define BOARD_TUD_RHPORT      0
+#define CFG_TUSB_RHPORT0_MODE (OPT_MODE_DEVICE | OPT_MODE_FULL_SPEED)
+#define BOARD_TUD_MAX_SPEED   OPT_MODE_FULL_SPEED
+#define CFG_TUSB_MCU          OPT_MCU_STM32F4
+
+// --- OS configuratie ---
+#define CFG_TUSB_OS           OPT_OS_FREERTOS
+
+// --- USB Device Stack ---
+#define CFG_TUD_ENABLED       1
+#define CFG_TUD_ENDPOINT0_SIZE   64
+
+// --- Class Configuratie ---
+#define CFG_TUD_CDC     0
+#define CFG_TUD_AUDIO   1  // Audio class inschakelen
+#define CFG_TUD_MSC     0
+#define CFG_TUD_HID     0
+#define CFG_TUD_MIDI    0
+#define CFG_TUD_VENDOR  0
+
+// --- Audio Specifieke Parameters ---
+// Dit zijn voorbeeldwaarden; pas ze aan op basis van jouw toepassing
+#define TUD_AUDIO_HEADSET_STEREO_DESC_LEN 120  // Totale lengte van de audiofunctie-descriptor (inclusief IAD)
+#define CFG_TUD_AUDIO_FUNC_1_DESC_LEN     TUD_AUDIO_HEADSET_STEREO_DESC_LEN
+#define CFG_TUD_AUDIO_FUNC_1_CTRL_BUF_SZ  64
+#define CFG_TUD_AUDIO_FUNC_1_N_AS_INT     1
+
+// Streaming (Audio Data) parameters:
+// Voor Microphone (device -> host, IN endpoint)
+#define CFG_TUD_AUDIO_FUNC_1_N_CHANNELS_TX               1
+#define CFG_TUD_AUDIO_FUNC_1_FORMAT_1_N_BYTES_PER_SAMPLE_TX 2
+#define CFG_TUD_AUDIO_FUNC_1_FORMAT_1_RESOLUTION_TX         16
+
+// Voor Speakers (host -> device, OUT endpoint)
+#define CFG_TUD_AUDIO_FUNC_1_N_CHANNELS_RX               1
+#define CFG_TUD_AUDIO_FUNC_1_FORMAT_1_N_BYTES_PER_SAMPLE_RX 4
+#define CFG_TUD_AUDIO_FUNC_1_FORMAT_1_RESOLUTION_RX         24
+
+#define CFG_TUD_AUDIO_FUNC_1_MAX_SAMPLE_RATE 48000
+
+// Endpoint nummers voor audio (zorg dat deze niet in conflict komen met andere klassen)
+#define EPNUM_AUDIO_OUT   0x03   // voor Speakers (OUT)
+#define EPNUM_AUDIO_IN    0x83   // voor Microfoon (IN)
+#define EPNUM_AUDIO_INT   0x04   // voor een (optioneel) Interrupt endpoint voor control
+
+//-------------------------------------------------------
+// Overige definitie (voor geheugentoewijzing, indien nodig)
+#ifndef TUSB_MEM_SECTION
+  #define TUSB_MEM_SECTION
+#endif
+
+#ifndef TUSB_MEM_ALIGN
+  #define TUSB_MEM_ALIGN __attribute__ ((aligned(4)))
+#endif
+
+#ifdef __cplusplus
+ }
+#endif
+
+#endif /* TUSB_CONFIG_H_ */

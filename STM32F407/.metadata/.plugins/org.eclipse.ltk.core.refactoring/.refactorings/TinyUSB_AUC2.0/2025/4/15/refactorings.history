@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;TinyUSB_AUC2.0/STM32F407_tinyUSB.ioc&apos; to &apos;TinyUSB_AUC2.0.ioc&apos;" description="Rename resource &apos;STM32F407_tinyUSB.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="STM32F407_tinyUSB.ioc" name="TinyUSB_AUC2.0.ioc" stamp="1744124713822" updateReferences="true"/>
+</session>

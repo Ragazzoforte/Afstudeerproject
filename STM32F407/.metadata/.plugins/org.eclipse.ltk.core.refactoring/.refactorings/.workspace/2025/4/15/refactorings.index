@@ -1,2 +1,16 @@
 1744111390133	Delete resource 'TinyUSB_CDC_Example'
 1744111394587	Delete resource 'STM32F407_tinyUSB'
+1744113220451	Delete resource 'TinyUSB_AUC2.0/Core/Inc/usb_descriptors.h'
+1744125254048	Delete resource 'test audio/Middlewares/Third_Party/tinyusb-0.18.0/src/tinyusb.mk'
+1744125259292	Delete resource 'test audio/Middlewares/Third_Party/tinyusb-0.18.0/src/CMakeLists.txt'
+1744125268604	Delete resource 'test audio/Middlewares/Third_Party/tinyusb-0.18.0/src/typec'
+1744125281990	Delete 6 resources
+1744125289876	Delete 16 resources
+1744125326134	Delete 11 resources
+1744125342979	Delete 58 resources
+1744125353066	Delete resource 'test audio/Middlewares/Third_Party/tinyusb-0.18.0/hw/mcu'
+1744125530222	Delete 5 resources
+1744125538051	Delete 4 resources
+1744125611018	Delete resource 'test audio/Middlewares/Third_Party/tinyusb-0.18.0/hw/bsp/stm32f4/family.cmake'
+1744125631531	Delete resource 'test audio/Core/Inc/stm32f4xx_hal_conf.h'
+1744131682145	Delete resource 'test audio'

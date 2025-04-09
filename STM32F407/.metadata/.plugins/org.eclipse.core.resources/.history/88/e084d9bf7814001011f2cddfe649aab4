@@ -1,0 +1,141 @@
+#include "usb_descriptors.h"
+#include "tusb.h"
+#include <string.h>
+
+//---------------------------------------------------------
+// Device Descriptor
+//---------------------------------------------------------
+#define USB_VID  0xCAFE
+#define USB_PID  0x4010
+#define USB_BCD  0x0200
+
+uint8_t const * tud_descriptor_device_cb(void)
+{
+  static tusb_desc_device_t const desc_device =
+  {
+    .bLength = sizeof(tusb_desc_device_t),
+    .bDescriptorType = TUSB_DESC_DEVICE,
+    .bcdUSB = USB_BCD,
+    // Gebruik IAD voor composite device
+    .bDeviceClass = TUSB_CLASS_MISC,
+    .bDeviceSubClass = MISC_SUBCLASS_COMMON,
+    .bDeviceProtocol = MISC_PROTOCOL_IAD,
+    .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
+    .idVendor = USB_VID,
+    .idProduct = USB_PID,
+    .bcdDevice = 0x0100,
+    .iManufacturer = 0x01,
+    .iProduct = 0x02,
+    .iSerialNumber = 0x03,
+    .bNumConfigurations = 0x01
+  };
+  return (uint8_t const *)&desc_device;
+}
+
+//---------------------------------------------------------
+// Interface nummering (alleen audio in dit voorbeeld)
+// We willen een composite audio-apparaat met drie interfaces:
+//  Interface 0: Audio Control
+//  Interface 1: Audio Streaming (Microfoon)
+//  Interface 2: Audio Streaming (Speakers)
+enum {
+    ITF_NUM_AUDIO_CONTROL = 0,
+    ITF_NUM_AUDIO_STREAMING_MIC,
+    ITF_NUM_AUDIO_STREAMING_SPK,
+    ITF_NUM_TOTAL
+};
+
+//---------------------------------------------------------
+// Vereenvoudigde placeholder macros voor audio descriptors
+// Deze macros zijn slechts voorbeelden en dienen mogelijk aangepast te worden!
+
+// IAD descriptor: groepeer de audio interfaces
+#define TUD_AUDIO_DESC_IAD(_firstitf, _nITFs, _stridx) \
+    8, TUSB_DESC_IAD, _firstitf, _nITFs, 0x01, 0x00, 0x20, _stridx
+
+// Audio Control interface descriptor (vereenvoudigd)
+#define TUD_AUDIO_DESC_STD_AC(_itfnum, _nEPs, _stridx) \
+    9, TUSB_DESC_INTERFACE, _itfnum, 0, _nEPs, TUSB_CLASS_AUDIO, 0x01, 0x20, _stridx
+
+// Een vereenvoudigde audio streaming descriptor macro
+#define TUD_AUDIO_HEADSET_STEREO_DESCRIPTOR(_ac_itf, _epout, _epin, _epint)  \
+  /* Defineer de Audio Streaming Interface voor Microfoon (Interface 1) */ \
+  9, TUSB_DESC_INTERFACE, ITF_NUM_AUDIO_STREAMING_MIC, 0, 0, TUSB_CLASS_AUDIO, 0x02, 0x20, 0x05, \
+  9, TUSB_DESC_INTERFACE, ITF_NUM_AUDIO_STREAMING_MIC, 1, 1, TUSB_CLASS_AUDIO, 0x02, 0x20, 0x05, \
+  /* Streaming header, format en endpoint voor Microfoon (IN) */ \
+  16, TUSB_DESC_CS_INTERFACE, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 1, 0, 0, 0, 0, 0, \
+  7, TUSB_DESC_ENDPOINT, _epin, TUSB_XFER_ISOCHRONOUS, 0x62, 0x01, \
+  8, TUSB_DESC_AUDIO_EP, 0x00, 0, 0x0101, \
+  /* Defineer de Audio Streaming Interface voor Speakers (Interface 2) */ \
+  9, TUSB_DESC_INTERFACE, ITF_NUM_AUDIO_STREAMING_SPK, 0, 0, TUSB_CLASS_AUDIO, 0x02, 0x20, 0x04, \
+  9, TUSB_DESC_INTERFACE, ITF_NUM_AUDIO_STREAMING_SPK, 1, 1, TUSB_CLASS_AUDIO, 0x02, 0x20, 0x04, \
+  /* Streaming header, format en endpoint voor Speakers (OUT) */ \
+  16, TUSB_DESC_CS_INTERFACE, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 1, 0, 0, 0, 0, 0, \
+  7, TUSB_DESC_ENDPOINT, _epout, TUSB_XFER_ISOCHRONOUS, 0xC4, 0x01, \
+  8, TUSB_DESC_AUDIO_EP, 0x00, 0, 0x0101
+
+// Voor dit voorbeeld gaan we ervan uit dat de totale configuratie-lengte wordt berekend als:
+#define CONFIG_TOTAL_LEN ( TUD_CONFIG_DESC_LEN + 8 + 9 + 16 + 8 + 6 + 7 + 8 + 9 + 9 + 16 + 6 + 7 + 8 )
+
+// Configuratie descriptor array (full-speed)
+uint8_t const desc_fs_configuration[] = {
+    // Configuratie header: Config number 1, totaal aantal interfaces ITF_NUM_TOTAL, string index 0, totale lengte, attributen 0x80 (bus-powered) en 100mA
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x80, 100),
+    // IAD: groepeer de audio interfaces (van interface 0 t/m 2)
+    TUD_AUDIO_DESC_IAD(ITF_NUM_AUDIO_CONTROL, 3, 0),
+    // Audio Control Interface (Interface 0)
+    TUD_AUDIO_DESC_STD_AC(ITF_NUM_AUDIO_CONTROL, 1, 0),
+    // Audio Streaming: definieer de streaming interfaces voor Microfoon en Speakers
+    TUD_AUDIO_HEADSET_STEREO_DESCRIPTOR(ITF_NUM_AUDIO_CONTROL, EPNUM_AUDIO_OUT, EPNUM_AUDIO_IN, EPNUM_AUDIO_INT)
+};
+
+#if TUD_OPT_HIGH_SPEED
+// Voor High-Speed gebruiken we dezelfde configuratie in dit voorbeeld
+uint8_t const desc_hs_configuration[] = {0};
+#endif
+
+uint8_t const * tud_descriptor_configuration_cb(uint8_t index)
+{
+  (void) index;
+#if TUD_OPT_HIGH_SPEED
+  return (tud_speed_get() == TUSB_SPEED_HIGH) ? desc_hs_configuration : desc_fs_configuration;
+#else
+  return desc_fs_configuration;
+#endif
+}
+
+//---------------------------------------------------------
+// String Descriptors
+//---------------------------------------------------------
+char const * string_desc_arr[] =
+{
+  (const char[]){0x09, 0x04},  // 0: Supported Language (0x0409 = English)
+  "TinyUSB",                 // 1: Manufacturer
+  "TinyUSB headset",         // 2: Product
+  "32003D000A47313339303432",// 3: Serial
+  "TinyUSB Speakers",        // 4: Speakers
+  "TinyUSB Microphone"       // 5: Microphone
+};
+
+static uint16_t _desc_str[32];
+
+uint16_t const * tud_descriptor_string_cb(uint8_t index, uint16_t langid)
+{
+  (void) langid;
+  uint8_t chr_count;
+  if(index==0)
+  {
+    memcpy(&_desc_str[1], string_desc_arr[0], 2);
+    chr_count = 1;
+  } else {
+    if(index >= sizeof(string_desc_arr)/sizeof(string_desc_arr[0])) return NULL;
+    const char* str = string_desc_arr[index];
+    chr_count = (uint8_t) strlen(str);
+    if(chr_count > 31) chr_count = 31;
+    for(uint8_t i=0; i<chr_count; i++){
+      _desc_str[1+i] = str[i];
+    }
+  }
+  _desc_str[0] = (TUSB_DESC_STRING << 8) | (2*chr_count+2);
+  return _desc_str;
+}

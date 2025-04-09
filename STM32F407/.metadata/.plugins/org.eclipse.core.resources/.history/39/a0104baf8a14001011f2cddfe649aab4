@@ -1,0 +1,153 @@
+#include "usb_descriptors.h"
+#include "tusb.h"
+#include <string.h>
+
+// Definieer descriptor types indien niet aanwezig
+#ifndef TUSB_DESC_IAD
+  #define TUSB_DESC_IAD 0x0B  // Interface Association Descriptor type volgens USB spec
+#endif
+
+#ifndef TUSB_DESC_AUDIO_EP
+  #define TUSB_DESC_AUDIO_EP 0x25  // Audio Endpoint Descriptor type volgens USB spec
+#endif
+
+//---------------------------------------------------------
+// Device Descriptor
+//---------------------------------------------------------
+#define USB_VID  0xCAFE
+#define USB_PID  0x4010
+#define USB_BCD  0x0200
+
+uint8_t const * tud_descriptor_device_cb(void)
+{
+  static tusb_desc_device_t const desc_device =
+  {
+      .bLength            = sizeof(tusb_desc_device_t),
+      .bDescriptorType    = TUSB_DESC_DEVICE,
+      .bcdUSB             = USB_BCD,
+      // Composite device via IAD
+      .bDeviceClass       = TUSB_CLASS_MISC,
+      .bDeviceSubClass    = MISC_SUBCLASS_COMMON,
+      .bDeviceProtocol    = MISC_PROTOCOL_IAD,
+      .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
+      .idVendor           = USB_VID,
+      .idProduct          = USB_PID,
+      .bcdDevice          = 0x0100,
+      .iManufacturer      = 0x01,
+      .iProduct           = 0x02,
+      .iSerialNumber      = 0x03,
+      .bNumConfigurations = 0x01
+  };
+  return (uint8_t const *)&desc_device;
+}
+
+//---------------------------------------------------------
+// Interface Nummering
+//---------------------------------------------------------
+// We definiëren hier 3 interfaces voor audio: Audio Control, Audio Streaming (Microfoon) en Audio Streaming (Speakers)
+enum {
+    ITF_NUM_AUDIO_CONTROL = 0,
+    ITF_NUM_AUDIO_STREAMING_MIC,
+    ITF_NUM_AUDIO_STREAMING_SPK,
+    ITF_NUM_TOTAL
+};
+
+//---------------------------------------------------------
+// Definieer enkele eigen audio descriptor macros (MY_ prefix)
+//---------------------------------------------------------
+#ifndef MY_TUD_AUDIO_DESC_IAD
+  // IAD: 8 bytes, groepeert de audio interfaces
+  #define MY_TUD_AUDIO_DESC_IAD(firstitf, nITFs, stridx)  \
+    8, TUSB_DESC_IAD, firstitf, nITFs, 0x01, 0x00, 0x20, stridx
+#endif
+
+#ifndef MY_TUD_AUDIO_DESC_STD_AC
+  // Een vereenvoudigde Audio Control header descriptor (9 bytes)
+  #define MY_TUD_AUDIO_DESC_STD_AC(itfnum, nEPs, stridx) \
+    9, TUSB_DESC_CS_INTERFACE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, stridx
+#endif
+
+#ifndef MY_TUD_AUDIO_STREAMING_DESCRIPTOR
+  // Een sterk vereenvoudigde Audio Streaming descriptor macro voor 1 endpoint.
+  // Dit is slechts een voorbeeld en voldoet mogelijk niet volledig aan de spec.
+  #define MY_TUD_AUDIO_STREAMING_DESCRIPTOR(itfnum, alt, num_ep, stridx, ep_addr, wMaxPacketSize, bInterval) \
+    9, TUSB_DESC_INTERFACE, itfnum, alt, num_ep, TUSB_CLASS_AUDIO, 0x02, 0x20, stridx, \
+    16, TUSB_DESC_CS_INTERFACE, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 1, 0, 0, 0, 0, 0, \
+    7, TUSB_DESC_ENDPOINT, ep_addr, TUSB_XFER_ISOCHRONOUS, wMaxPacketSize, bInterval, \
+    8, TUSB_DESC_AUDIO_EP, 0x00, 0, 0x0101
+#endif
+
+//---------------------------------------------------------
+// Totale configuratielengte (schatting voor dit voorbeeld)
+// Pas deze waarde aan zodat alle bytes van je descriptors worden meegeteld.
+#define CONFIG_TOTAL_LEN ( TUD_CONFIG_DESC_LEN + 8 + 9 + 9 + 16 + 7 + 8 + 9 + 9 + 16 + 7 + 8 )
+
+//---------------------------------------------------------
+// Configuratie Descriptor
+//---------------------------------------------------------
+uint8_t const desc_fs_configuration[] =
+{
+    // Configuratie header: configuratienummer = 1, aantal interfaces = ITF_NUM_TOTAL, geen string, lengte, 0x80 = bus powered, 100 mA
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x80, 100),
+    // IAD voor audio: groepeert alle audio interfaces (van Audio Control tot Speakers)
+    MY_TUD_AUDIO_DESC_IAD(ITF_NUM_AUDIO_CONTROL, ITF_NUM_TOTAL, 0),
+    // Audio Control interface (Interface 0)
+    MY_TUD_AUDIO_DESC_STD_AC(ITF_NUM_AUDIO_CONTROL, 1, 0),
+    // Audio Streaming interface voor Microfoon (Interface 1, Alternate Setting 1)
+    MY_TUD_AUDIO_STREAMING_DESCRIPTOR(ITF_NUM_AUDIO_STREAMING_MIC, 1, 1, 0, EPNUM_AUDIO_IN, 0x62, 1),
+    // Audio Streaming interface voor Speakers (Interface 2, Alternate Setting 1)
+    MY_TUD_AUDIO_STREAMING_DESCRIPTOR(ITF_NUM_AUDIO_STREAMING_SPK, 1, 1, 0, EPNUM_AUDIO_OUT, 0xC4, 1)
+};
+
+#if TUD_OPT_HIGH_SPEED
+uint8_t const desc_hs_configuration[] = { 0 };
+#endif
+
+uint8_t const * tud_descriptor_configuration_cb(uint8_t index)
+{
+  (void) index;
+#if TUD_OPT_HIGH_SPEED
+  return (tud_speed_get() == TUSB_SPEED_HIGH) ? desc_hs_configuration : desc_fs_configuration;
+#else
+  return desc_fs_configuration;
+#endif
+}
+
+//---------------------------------------------------------
+// String Descriptors
+//---------------------------------------------------------
+char const * string_desc_arr[] =
+{
+  (const char[]){0x09, 0x04},           // 0: Taal (0x0409 = Engels)
+  "TinyUSB",                          // 1: Manufacturer
+  "TinyUSB headset",                  // 2: Product
+  "32003D000A47313339303432",         // 3: Serial Number
+  "TinyUSB Speakers",                 // 4: Speakers (optioneel)
+  "TinyUSB Microphone"                // 5: Microphone (optioneel)
+};
+
+static uint16_t _desc_str[32];
+
+uint16_t const * tud_descriptor_string_cb(uint8_t index, uint16_t langid)
+{
+  (void) langid;
+  uint8_t chr_count;
+  if (index == 0)
+  {
+    memcpy(&_desc_str[1], string_desc_arr[0], 2);
+    chr_count = 1;
+  }
+  else
+  {
+    if (index >= sizeof(string_desc_arr) / sizeof(string_desc_arr[0])) return NULL;
+    const char *str = string_desc_arr[index];
+    chr_count = (uint8_t) strlen(str);
+    if (chr_count > 31) chr_count = 31;
+    for (uint8_t i = 0; i < chr_count; i++)
+    {
+      _desc_str[1 + i] = str[i];
+    }
+  }
+  _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 * chr_count + 2);
+  return _desc_str;
+}
