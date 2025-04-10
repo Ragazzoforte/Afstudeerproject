@@ -1,10 +1,10 @@
-14:46:36 **** Incremental Build of configuration Debug for project TinyUSB_AUC2.0 ****
+08:23:07 **** Incremental Build of configuration Debug for project TinyUSB_AUC2.0 ****
 make -j20 all 
 arm-none-eabi-size  TinyUSB_AUC2.0.elf 
    text	   data	    bss	    dec	    hex	filename
-  47784	    220	  40980	  88984	  15b98	TinyUSB_AUC2.0.elf
+  48480	    220	  40980	  89680	  15e50	TinyUSB_AUC2.0.elf
 Finished building: default.size.stdout
  
 
-14:46:37 Build Finished. 0 errors, 0 warnings. (took 527ms)
+08:23:08 Build Finished. 0 errors, 0 warnings. (took 1s.912ms)
 

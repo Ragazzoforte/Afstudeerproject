@@ -445,37 +445,45 @@ bool tud_audio_tx_done_pre_load_cb(uint8_t rhport, uint8_t itf, uint8_t ep_in, u
 void cdc_task(void* params)
 {
   (void) params;
+  char line_buf[128];
+  uint16_t line_idx = 0;
 
-  // RTOS forever loop
-  while ( 1 )
-  {
-    // connected() check for DTR bit
-    // Most but not all terminal client set this when making connection
-    // if ( tud_cdc_connected() )
-    {
-      // There are data available
-      while ( tud_cdc_available() )
-      {
-        uint8_t buf[64];
+  for (;;) {
+    if (tud_cdc_connected()) {
+      while (tud_cdc_available()) {
+        uint8_t ch;
+        if (tud_cdc_read(&ch, 1) == 1) {
+          // Als het teken een carriage return of line feed is
+          if (ch == '\r' || ch == '\n') {
+            // Controleer of er daadwerkelijk data in de buffer staat
+            if (line_idx > 0) {
+              line_buf[line_idx] = '\0';  // Zorg voor een null-terminated string
 
-        // read and echo back
-        uint32_t count = tud_cdc_read(buf, sizeof(buf));
-        (void) count;
+              // Verstuur eerst de ingevoerde regel
+              tud_cdc_write((uint8_t *)line_buf, line_idx);
+              tud_cdc_write((uint8_t *)"\r\n", 2);
 
-        // Echo back
-        // Note: Skip echo by commenting out write() and write_flush()
-        // for throughput test e.g
-        //    $ dd if=/dev/zero of=/dev/ttyACM0 count=10000
-        tud_cdc_write(buf, count);
+              // Voeg een extra regel toe met "groetjes michel"
+              const char *extra_msg = "groetjes michel";
+              tud_cdc_write((uint8_t *)extra_msg, strlen(extra_msg));
+              tud_cdc_write((uint8_t *)"\r\n", 2);
+
+              tud_cdc_write_flush();
+              line_idx = 0;  // Reset de bufferindex
+            }
+          } else {
+            // Voeg het karakter toe aan de buffer (als er nog ruimte is)
+            if (line_idx < sizeof(line_buf) - 1) {
+              line_buf[line_idx++] = (char)ch;
+            }
+          }
+        }
       }
-
-      tud_cdc_write_flush();
     }
-
-    // For ESP32-Sx this delay is essential to allow idle how to run and reset watchdog
     vTaskDelay(1);
   }
 }
+
 
 // Invoked when cdc when line state changed e.g connected/disconnected
 void tud_cdc_line_state_cb(uint8_t itf, bool dtr, bool rts)
@@ -621,7 +629,7 @@ int main(void)
   /* add threads, ... */
   blinky_tm = xTimerCreate(NULL, pdMS_TO_TICKS(BLINK_NOT_MOUNTED), true, NULL, led_blinky_cb);
   xTaskCreate( usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES-1, NULL);
-//  xTaskCreate( cdc_task, "cdc", CDC_STACK_SZIE, NULL, configMAX_PRIORITIES-2, NULL);
+  xTaskCreate( cdc_task, "cdc", CDC_STACK_SZIE, NULL, configMAX_PRIORITIES-2, NULL);
 //  xTaskCreate( audio_task, "cdc", CDC_STACK_SZIE, NULL, configMAX_PRIORITIES-2, NULL);
 
   // Maak de audio task aan. Het stackgrootte en prioriteit kunnen per toepassing verschillen.

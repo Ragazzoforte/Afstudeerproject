@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="cdc"/>
 		<item value="tud_descriptor_string"/>
 		<item value="tud_descriptor"/>
 		<item value="TUD_AUDIO_HEADSET_STEREO_DESC_LEN"/>
